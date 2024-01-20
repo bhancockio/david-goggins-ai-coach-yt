@@ -90,9 +90,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     });
 
     try {
-      const response = await axios.post("/api/subscription", {
-        subscription,
-      });
+      const response = await axios.post("/api/subscription", subscription);
 
       if (!response.data.success) {
         console.error(response.data.message ?? "Unknown error.");
