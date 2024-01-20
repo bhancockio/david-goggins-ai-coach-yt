@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^4.29.3",
     "@prisma/client": "^5.8.1",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-switch": "^1.0.3",
     "axios": "^1.6.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",

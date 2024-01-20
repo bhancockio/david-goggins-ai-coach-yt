@@ -6,7 +6,7 @@ import { Assistant, UserThread } from "@prisma/client";
 import axios from "axios";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [, setUserThread] = useAtom(userThreadAtom);
@@ -69,6 +69,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <div className="flex flex-col w-full h-full">
       <Navbar />
       {children}
+      <Toaster />
     </div>
   );
 }

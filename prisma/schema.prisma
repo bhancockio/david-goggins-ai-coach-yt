@@ -19,3 +19,12 @@ model UserThread {
   threadId  String
   createdAt DateTime @default(now())
 }
+
+model ChallengePreferences {
+  id                String   @id @default(uuid())
+  userId            String   @unique
+  challengeId       String
+  sendNotifications Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
