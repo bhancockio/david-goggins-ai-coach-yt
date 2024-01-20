@@ -13,7 +13,7 @@ export default authMiddleware({
     "/api/run/retrieve",
     "/api/challenge-users",
     "/api/openai",
-    "/api/send-notification",
+    "/api/send-notifications",
   ],
 });
 
