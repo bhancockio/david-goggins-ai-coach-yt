@@ -1,14 +1,44 @@
 "use client";
 
-import { userThreadAtom } from "@/atoms";
+import { assistantAtom, userThreadAtom } from "@/atoms";
 import Navbar from "@/components/Navbar";
-import { UserThread } from "@prisma/client";
+import { Assistant, UserThread } from "@prisma/client";
 import axios from "axios";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [, setUserThread] = useAtom(userThreadAtom);
+  const [assistant, setAssistant] = useAtom(assistantAtom);
+
+  useEffect(() => {
+    if (assistant) return;
+
+    async function getAssistant() {
+      try {
+        const response = await axios.get<{
+          success: boolean;
+          message?: string;
+          assistant: Assistant;
+        }>("/api/assistant");
+
+        if (!response.data.success || !response.data.assistant) {
+          console.error(response.data.message ?? "Unknown error.");
+          toast.error("Failed to fetch assistant.");
+          setAssistant(null);
+          return;
+        }
+
+        setAssistant(response.data.assistant);
+      } catch (error) {
+        console.error(error);
+        setAssistant(null);
+      }
+    }
+
+    getAssistant();
+  }, [assistant, setAssistant]);
 
   useEffect(() => {
     async function getUserThread() {
