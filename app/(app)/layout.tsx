@@ -2,6 +2,7 @@
 
 import { assistantAtom, userThreadAtom } from "@/atoms";
 import Navbar from "@/components/Navbar";
+import useServiceWorker from "@/hooks/useServiceWorker";
 import { Assistant, UserThread } from "@prisma/client";
 import axios from "axios";
 import { useAtom } from "jotai";
@@ -11,6 +12,8 @@ import toast, { Toaster } from "react-hot-toast";
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [, setUserThread] = useAtom(userThreadAtom);
   const [assistant, setAssistant] = useAtom(assistantAtom);
+
+  useServiceWorker();
 
   useEffect(() => {
     if (assistant) return;
